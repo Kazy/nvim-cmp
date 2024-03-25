@@ -69,7 +69,7 @@ str.remove_suffix = function(text, suffix)
     end
     i = i + 1
   end
-  return string.sub(text, 1, -#suffix - 1)
+  return string.sub(text, 1, - #suffix - 1)
 end
 
 ---trim
@@ -120,12 +120,10 @@ str.get_word = function(text, stop_char, min_length)
   end
   for i = 1, #text do
     local c = string.byte(text, i, i)
+    has_alnum = has_alnum or char.is_alnum(c)
     if #word < min_length then
       table.insert(word, string.char(c))
-    elseif not INVALIDS[c] then
-      add(c)
-      has_alnum = has_alnum or char.is_alnum(c)
-    elseif not has_alnum then
+    elseif not (INVALIDS[c] and has_alnum) then
       add(c)
     elseif #stack ~= 0 then
       add(c)
