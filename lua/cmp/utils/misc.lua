@@ -165,7 +165,7 @@ misc.copy = function(tbl)
     return tbl
   end
 
-  if islist(tbl) then
+  if vim.islist(tbl) then
     local copy = {}
     for i, value in ipairs(tbl) do
       copy[i] = misc.copy(value)
